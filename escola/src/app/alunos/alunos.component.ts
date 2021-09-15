@@ -20,6 +20,13 @@ export class AlunosComponent implements OnInit {
 
   cadastrar() {
     console.log(this.aluno);
+    this.alunosService.cadastrarAluno(this.aluno).subscribe(aluno => {
+      this.aluno = new AlunoModel();
+      this.listarAlunos();
+    }, err => {
+      console.log('Erro ao cadastrar o aluno', err)
+
+    })
   }
 
   listarAlunos() {
