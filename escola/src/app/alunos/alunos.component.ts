@@ -18,6 +18,24 @@ export class AlunosComponent implements OnInit {
     this.listarAlunos();
   }
 
+  atualizar(id: number) {
+    this.alunosService.atualizarAluno(id, this.aluno).subscribe(aluno => {
+      this.aluno = new AlunoModel();
+      this.listarAlunos();
+    }, err => {
+      console.log('Erro ao atualizar o aluno', err)
+    })
+  }
+
+  remover(id: number) {
+    this.alunosService.removerAluno(id).subscribe(aluno => {
+      this.aluno = new AlunoModel();
+      this.listarAlunos();
+    }, err => {
+      console.log('Erro ao atualizar o aluno', err)
+    })
+  }
+
   cadastrar() {
     console.log(this.aluno);
     this.alunosService.cadastrarAluno(this.aluno).subscribe(aluno => {
@@ -25,7 +43,6 @@ export class AlunosComponent implements OnInit {
       this.listarAlunos();
     }, err => {
       console.log('Erro ao cadastrar o aluno', err)
-
     })
   }
 
@@ -36,5 +53,4 @@ export class AlunosComponent implements OnInit {
       console.log('Erro ao listar os alunos', err);
     })
   }
-
 }
